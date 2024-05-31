@@ -4,7 +4,6 @@ export const AppointmentSchema = new mongoose.Schema({
     comment: {
         type: String,
         required: [true, 'An appointment must have a name'],  
-        unique: true,   
         trim: true
     },
     hairstyle: { type: String}, // Adjust if relevant to appointments

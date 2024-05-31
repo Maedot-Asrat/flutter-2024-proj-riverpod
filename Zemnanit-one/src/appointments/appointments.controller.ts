@@ -63,4 +63,5 @@ async uploadData(@Body() appointmentDTO: CreateAppointmentDto) {
     // Directly call the service method with the appointment data
     await this.appointmentService.create(appointmentDTO);
 }
+
 }
