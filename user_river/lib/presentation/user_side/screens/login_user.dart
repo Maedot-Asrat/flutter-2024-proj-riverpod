@@ -1,4 +1,3 @@
-
 // import 'package:flutter/material.dart';
 // import 'package:flutter_riverpod/flutter_riverpod.dart';
 // import 'package:zemnanit/presentation/user_side/providers/auth_provider.dart';
@@ -36,7 +35,7 @@
 //   Widget build(BuildContext context) {
 //     ref.listen<AuthState>(authServiceProvider, (previous, next) {
 //       if (next.accessToken != null) {
-        
+
 //         Navigator.of(context).pushReplacement(
 //           MaterialPageRoute(
 //               builder: (context) => Home(
@@ -150,14 +149,13 @@
 //                 ),
 //               ),
 //             ),
-            
+//
 //           ],
 //         ),
 //       ),
 //     );
 //   }
 // }
-
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -272,7 +270,9 @@ class _LoginState extends ConsumerState<Log_in> {
                       hintText: 'Password',
                       suffixIcon: IconButton(
                         icon: Icon(
-                          _obscurePassword ? Icons.visibility : Icons.visibility_off,
+                          _obscurePassword
+                              ? Icons.visibility
+                              : Icons.visibility_off,
                         ),
                         onPressed: () {
                           setState(() {
