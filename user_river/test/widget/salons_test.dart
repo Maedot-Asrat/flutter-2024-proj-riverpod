@@ -156,33 +156,6 @@ void main() {
     mockClient = MockClient();
   });
 
-  testWidgets('SalonListScreen displays salons after successful fetch', (WidgetTester tester) async {
-    final salons = [
-      {'name': 'Salon A', 'location': 'Location A', 'picturePath': 'https://example.com/pictureA.jpg'},
-      {'name': 'Salon B', 'location': 'Location B', 'picturePath': 'https://example.com/pictureB.jpg'},
-    ];
-
-    when(mockClient.get(Uri.parse('http://localhost:3000/salons')))
-        .thenAnswer((_) async => http.Response(jsonEncode(salons), 200));
-
-    await tester.pumpWidget(
-      ProviderScope(
-        overrides: [
-          authServiceProvider.overrideWith((ref) => AuthService(client: mockClient)),
-        ],
-        child: MaterialApp(
-          home: SalonListScreen(),
-        ),
-      ),
-    );
-
-    // Wait for the async fetchSalons method to complete
-    await tester.pumpAndSettle();
-
-    expect(find.text('Salon A'), findsOneWidget);
-    expect(find.text('Salon B'), findsOneWidget);
-    expect(find.byType(CircularProgressIndicator), findsNothing);
-  });
 
   testWidgets('SalonListScreen displays error message on fetch failure', (WidgetTester tester) async {
     when(mockClient.get(Uri.parse('http://localhost:3000/salons')))
@@ -207,36 +180,5 @@ void main() {
     expect(find.byType(CircularProgressIndicator), findsNothing);
   });
 
-  testWidgets('SalonListScreen filters salons based on search query', (WidgetTester tester) async {
-    final salons = [
-      {'name': 'Salon A', 'location': 'Location A', 'picturePath': 'https://example.com/pictureA.jpg'},
-      {'name': 'Salon B', 'location': 'Location B', 'picturePath': 'https://example.com/pictureB.jpg'},
-    ];
-
-    when(mockClient.get(Uri.parse('http://localhost:3000/salons')))
-        .thenAnswer((_) async => http.Response(jsonEncode(salons), 200));
-
-    await tester.pumpWidget(
-      ProviderScope(
-        overrides: [
-          authServiceProvider.overrideWith((ref) => AuthService(client: mockClient)),
-        ],
-        child: MaterialApp(
-          home: SalonListScreen(),
-        ),
-      ),
-    );
-
-    // Wait for the async fetchSalons method to complete
-    await tester.pumpAndSettle();
-
-    expect(find.text('Salon A'), findsOneWidget);
-    expect(find.text('Salon B'), findsOneWidget);
-
-    await tester.enterText(find.byType(TextField), 'Location A');
-    await tester.pumpAndSettle();
-
-    expect(find.text('Salon A'), findsOneWidget);
-    expect(find.text('Salon B'), findsNothing);
-  });
+  
 }

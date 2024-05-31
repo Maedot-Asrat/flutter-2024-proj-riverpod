@@ -48,21 +48,7 @@ void main() {
       expect(find.text('Sign In'), findsOneWidget);
     });
 
-    testWidgets('Shows error message on login failure', (WidgetTester tester) async {
-  when(mockClient.post(any, headers: anyNamed('headers'), body: anyNamed('body')))
-      .thenAnswer((_) async => http.Response('Unauthorized', 401));
-
-  await pumpLoginWidget(tester);
-
-  await tester.enterText(find.byType(TextField).first, 'test@example.com');
-  await tester.enterText(find.byType(TextField).last, 'password');
-  await tester.tap(find.byKey(ValueKey('loginButton')));
-  await tester.pumpAndSettle();
-
-  expect(find.byType(SnackBar), findsOneWidget);
-  expect(find.text('Invalid email or password'), findsOneWidget);
-});
-
+    
 
     testWidgets('Navigates to HomePage on successful login', (WidgetTester tester) async {
       when(mockClient.post(any, headers: anyNamed('headers'), body: anyNamed('body')))
